@@ -1,0 +1,53 @@
+--Exercicio 1.2 DDL
+
+CREATE DATABASE Exercicios_1_2;
+
+USE Exercicio_1_2;
+
+--criado tabelas do bd
+
+CREATE TABLE Clientes
+(
+	IdCliente	INT PRIMARY KEY IDENTITY
+	,Nome	VARCHAR(50)NOT NULL
+	,Cpf	CHAR(11)NOT NULL		
+);
+
+CREATE TABLE Empresas
+(
+	IdEmpresa	INT PRIMARY KEY IDENTITY
+	,RazaoSocial	VARCHAR(100)NOT NULL
+	,[Site]	VARCHAR(100)NOT NULL 
+);
+
+CREATE TABLE Marcas
+(
+	IdMarca	 INT PRIMARY KEY IDENTITY
+	,NomeMarca	VARCHAR(50)NOT NULL
+);
+
+CREATE TABLE Modelos
+(
+	IdModelo	INT PRIMARY KEY IDENTITY
+	,NomeModelo   VARCHAR(50)NOT NULL
+);
+
+CREATE TABLE Veiculos
+(
+	IdVeiculo	INT PRIMARY KEY IDENTITY
+	,IdEmpresa	INT FOREIGN KEY REFERENCES Empresas(IdEmpresa)NOT NULL
+	,IdModelo	INT FOREIGN KEY REFERENCES Modelos(IdModelo)NOT NULL
+	,IdMarca    INT FOREIGN KEY REFERENCES Marcas(IdMarca)NOT NULL
+	,Placa	VARCHAR(7)NOT NULL
+);
+
+CREATE TABLE alugueis
+(
+	IdAluguel	INT PRIMARY KEY IDENTITY
+	,IdCliente	INT FOREIGN KEY REFERENCES Clientes(IdCliente)NOT NULL
+	,IdVeiculo	INT FOREIGN KEY REFERENCES Veiculos(IdVeiculo)NOT NULL
+	,DataRetirada	SMALLDATETIME NOT NULL		
+	,DataEntrega	SMALLDATETIME NOT NULL
+);
+
+
